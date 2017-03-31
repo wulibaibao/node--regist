@@ -1,0 +1,12 @@
+html,body{
+	position: relative;
+	height: 100%;
+	width: 100%;
+	background: url('../images/timg.jpg') no-repeat center center;
+	background-size: 100% 100%;
+}
+.container{
+	width: 300px;text-align: center;height: 160px;position: absolute;left: 10%;top:30%;
+}
+#username,#password{margin-bottom:12px;height:32px;font-size: 14px}
+input[type='text'],input[type='password']{padding-left: 5px}

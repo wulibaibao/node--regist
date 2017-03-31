@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ch-ZN">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta charset="utf-8">
+	<title>注册登陆</title>
+	<link rel="stylesheet" type="text/css" href="../lib/normalize.css">
+	<link rel="stylesheet" type="text/css" href="../lib/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="../lib/button.css">
+	<link rel="stylesheet" type="text/css" href="../css/regist.css">
+</head>
+<body>
+	<div class="container">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<span class="span">账号：</span>
+					<input type="text"  name="account-number" class="account-number" placeholder="请输入昵称2~8个字">
+				</div>
+				<div class="col-md-12">
+					<span class="span"></span><span class="placeholder account-number-placeholder"></span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<span class="span">昵称：</span>
+					<input type="text"  name="name" class="name" placeholder="请输入昵称2~8个字">
+				</div>
+				<div class="col-md-12">
+					<span class="span"></span><span class="placeholder name-placeholder"></span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<span class="span">密码：</span>
+					<input type="password" name="password" class="password" placeholder="请输入密码6~12个字符">
+				</div>
+				<div class="col-md-12">
+					<span class="span"></span><span class="placeholder password-placeholder"></span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<span class="span">再次输入：</span>
+					<input type="password" class="confirm-password" placeholder="请输入密码6~12个字符">
+				</div>
+				<div class="col-md-12">
+					<span class="span"></span><span class="placeholder confirm-password-placeholder"></span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<span class="span">手机号：</span>
+					<input type="tel" class="telphone" name="telphone" placeholder="请输入手机号">
+				</div>
+				<div class="col-md-12">
+					<span class="span"></span><span class="placeholder telphone-placeholder"></span>
+				</div>
+			</div>
+			<div class="row text-center">
+				<button class="button button-primary button-rounded button-small" id="submit">提交</button>
+				<button class="button button-primary button-rounded button-small" id="reset">重置</button>
+			</div>
+		</div>
+	</div>
+</body>
+	<script type="text/javascript" src="../lib/jquery.js"></script>
+	<script type="text/javascript" src="../lib/bootstrap.js"></script>
+	<script type="text/javascript" src="../lib/moment.js"></script>
+	<script type="text/javascript" src="../js/regist.js"></script>
+</html>
