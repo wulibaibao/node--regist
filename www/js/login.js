@@ -11,7 +11,11 @@ $(function(){
            	data: regist,
            	async: false,
            	success:(data)=>{
-           		console.log(data);	
+           		var data = JSON.parse(data);
+           		console.log(data);
+           		if(data.msg == 'ok'){
+           			userStatus(data,jumpWind);
+           		}	
            	},
            	error:(err)=>{
            		console.log(err);
@@ -23,3 +27,10 @@ $(function(){
 		location.href = "/views/regist.html";
 	})
 })
+function userStatus(res,callback){
+	alert(res.reason);
+	callback();
+}
+function jumpWind(){
+	location.href = '/views/chatroom.html';
+}

@@ -1,75 +1,34 @@
-const express = require('express');
-const bodyparser = require('body-parser');
-const static = require('express-static');
-const mysql = require('mysql');
-const sqlOption = {
+const express = require('express');        //express框架
+const bodyparser = require('body-parser');  //bodyparser  数据解析
+const static = require('express-static');	//静态文件访问
+const mysql = require('mysql');             //mysql模块
+const login = require('login');
+const sqlOption = {				//sql配置
 	host: 'localhost',
 	user: 'root', 
 	password: '692415abc', 
 	database: 'wechat'
 }
-const db = mysql.createPool(sqlOption);
-const server = express();
-
-server.use(bodyparser.urlencoded({extended:false}));
-server.listen(8080);
-
-server.post('/login',(req,res,next)=>{
-	res.setHeader('Content-Type', 'text/plain');
-	console.log(req.body.username);
-	db.query(`SELECT * FROM user_table WHERE username='${req.body.username}'`,(err,data)=>{
-		if(err){
-			res.send({"msg":"404"});
-		}else {
-			console.log(JSON.stringify(data));
-			var message = data[0];
-			console.log('查询成功：'+ message);
-			if(message != null || message != undefined){
-				if(message.password == req.body.password){
-					res.send({"msg":"ok","reseon":"登陆成功"});
-					next();
-				}else{
-					res.send({"msg":"fild","reseon":"密码错误"});
-					next();
-				}
-			}else{
-				res.send({"msg":"fild","reseon":"暂无用户，请注册！"});
-				next();
-			}
-		}
-	})
+const db = mysql.createPool(sqlOption); 		//  sql连接池链接sql表
+const server = express();	//开启express服务
+server.use(bodyparser.urlencoded({extended:false}));	//配置bodyparser
+server.listen(8080);   //开启端口监听配置端口
+server.post('/login',(req,res,next)=>{			//express  post方法   接口请求
+	res.setHeader('Content-Type', 'text/plain');	//设置请求头
+	console.log(req.body.username);	
+	login.login(db,res,req,next);
 });
-
 server.post('/regist',(req,res,next)=>{
 	res.setHeader('Content-Type', 'text/plain');
-	console.log(req.body);
-	db.query(`SELECT * FROM user_table WHERE username='${req.body.username}'`,(err,data)=>{
-		if (err) {
-			console.log('err')
-			res.send({"msg":"404","reason":"网络错误"});
-		}else {
-			if (data.account == null || data.account == undefined) {
-				db.query(`INSERT INTO user_table(account,username,password,telphone) VALUES ('${req.body.account}','${req.body.username}','${req.body.password}','${req.body.telphone}')`,(err,data)=>{
-					if(err){
-						res.send({"msg":"failde","reason":"数据错误，请重新提交"});
-						next();
-					}else{
-						res.send({"msg":"ok","reason":"恭喜您注册成功"});
-						next();
-					}
-				})
-			}else{
-				res.send({"msg":"error","reason":"账号已存在，请重新输入"});
-				next();
-			}
-		}
-	})
+	console.log(req.body)
+	login.regist(db,res,req,next);
+});
+server.post('/chatroom',(req,res,next)=>{
+	res.setHeader('Content-Yype','text/plain');
+	login.chatRoom(db,req,res,next);
 })
-
-server.get('/',(req,res,next)=>{
-	next();
+server.get('/',(req,res)=>{	//get方法  读取文件 get请求
+	
 })
-
-server.use(static('./www'));
-
+server.use(static('./www'));       //静态文件配置  
 console.log('server starting sucess ,address: http://127.0.0.1:8080');

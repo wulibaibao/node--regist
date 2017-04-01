@@ -1,11 +1,11 @@
 $(function(){
 
 	$('#submit').on('click',function(){
-		var username = $('.name').val();
-		var password = $('.password').val();
-		var confirmPassword = $('.confirm-password').val();
-		var telphone = $('.telphone').val();
-		var accountNumber = $('.account-number').val();
+		let username = $('.name').val();
+        let password = $('.password').val();
+        let confirmPassword = $('.confirm-password').val();
+        let telphone = $('.telphone').val();
+        let accountNumber = $('.account-number').val();
 		if(password == confirmPassword){
 			let submitInform = {
 				"username":username,
@@ -20,7 +20,11 @@ $(function(){
 		       	data: submitInform,
 		       	async: false,
 		       	success:(data)=>{
-		       		console.log(data);	
+		       		console.log(data);
+                    var data = JSON.parse(data);
+		       		if(data.msg == 'ok'){
+		       			userStatus(data,jumpWind);
+					}
 		       	},
 		       	error:(err)=>{
 		       		console.log(err);
@@ -32,3 +36,10 @@ $(function(){
 	})
 	
 })
+function userStatus(res,callback){
+    alert(res.reason);
+    callback();
+}
+function jumpWind(){
+    location.href = '/views/login.html';
+}
